@@ -62,9 +62,9 @@ def self.find_or_create_by(name:, breed:)
     WHERE name = ?, breed = ?
     SQL
     
-    dog = DB[:conn].execute(sql)
+   
 
-    if dog
+    if DB[:conn].execute(sql, name, breed).first
         new_dog = self.new_from_db(dog)
     else
         new_dog = self.create({:name => name, :breed => breed})
