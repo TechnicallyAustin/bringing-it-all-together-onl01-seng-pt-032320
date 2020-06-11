@@ -58,11 +58,11 @@ end
 
 def self.find_or_create_by(name:, breed:)
     sql = <<-SQL
-    SELECT name, breed FROM dogs 
+    SELECT * FROM dogs 
     WHERE name = ?, breed = ?
     SQL
-    dog = DB[:conn].execute(sql, name, breed).first
     
+    dog = DB[:conn].execute(sql)
 
     if dog
         new_dog = self.new_from_db(dog)
